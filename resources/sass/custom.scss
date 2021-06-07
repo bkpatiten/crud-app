@@ -1,0 +1,56 @@
+
+.table thead > tr> th > a.sort-desc:after
+{
+	content: "\f0de";
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	display: block;
+	font-family: 'Font Awesome 5 Free';
+	opacity: 0.5;
+}
+.table thead > tr> th > a.sort-asc:after
+{
+	content: "\f0dd";
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	display: block;
+	font-family: 'Font Awesome 5 Free';
+	opacity: 0.5;
+}
+.table thead > tr> th > a.sort:after
+{
+	opacity: 0.2;
+    content: "\f0dc";
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	display: block;
+	font-family: 'Font Awesome 5 Free';
+	opacity: 0.5;
+}
+.table thead > tr> th> a
+{
+	color:black;
+	font-weight: bold;
+	text-decoration: none;
+}
+.table thead > tr> th> a:hover
+{
+	/*color:black;*/
+	opacity: 0.8;
+}
+.table-hover > tbody > tr:hover
+{
+	background-color:#EBEDEF;
+}
+.table thead > tr> th
+{
+	position: relative;
+	padding-right: 30px;
+}
+.table thead > tr> th > a
+{
+		width: 25px;
+}

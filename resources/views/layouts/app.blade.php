@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @yield('css')
 </head>
 <body>
     <div id="app">
@@ -52,6 +55,12 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link {{(\Request::route()->getName() == 'home') ? 'active' : ''}}" href="{{ route('home') }}">{{ __('Home') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{(\Request::route()->getName() == 'products.index' || \Request::route()->getName() == 'products.create' || \Request::route()->getName() == 'products.show' || \Request::route()->getName() == 'products.edit') ? 'active' : ''}}" href="{{ route('products.index') }}">{{ __('Products') }}</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -79,5 +88,29 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        var defaultUser = '{{asset('/uploads/products/default_product_image.jpg')}}';
+        function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+
+                        $('#product_thumbnail').attr('src', e.target.result);
+                        
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+                else
+                {
+                    $('#product_thumbnail').attr('src',defaultUser);
+                }
+            }
+        $(document).ready(function(){
+            $('#productForm').on('change','input[type="file"][name="product_image"]',function(){
+                readURL(this);
+            });
+        });
+    </script>
+    @yield('scripts')
 </body>
 </html>
